@@ -12,8 +12,9 @@
 |birthday                 |date     |null: false                  |
 
 
-### has_many items
-### has_many purchases
+### Association
+ has_many items
+ has_many purchases
 
 
 
@@ -37,8 +38,9 @@
 |price                    |integer    |null: false                          |
 
 
-### has_one purchase
-### belongs_to user
+### Association
+ has_one purchase
+ belongs_to user
 
 
 
@@ -55,9 +57,10 @@
 |item                     |references  |null: false, foreign_key: true       |   
 
 
-### has_one address
-### belongs_to user
-### belongs_to item
+### Association
+ has_one address
+ belongs_to user
+ belongs_to item
 
 
 
@@ -86,11 +89,5 @@
 
 
 
-### belongs_to purchase
-
-
-
-null: false	カラムが空の状態では保存できない
-unique: true	一意性のみ許可（同じ値は保存できない）
-foreign_key: true	外部キーを設定（別テーブルのカラムを参照する）
-	
+### Association
+ belongs_to purchase
