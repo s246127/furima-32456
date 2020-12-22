@@ -82,7 +82,7 @@
 |city                     |string      |null: false                          | 
 |district                 |string      |null: false                          | 
 |building_number          |string      |                                     |
-|phone_number             |string      |null: false,unique: true             |
+|phone_number             |string      |null: false                          |
 
 
 
