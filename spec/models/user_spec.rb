@@ -36,9 +36,9 @@ RSpec.describe User, type: :model do
       end
   
       it "password_confirmationが空の場合は登録できないこと" do
-        @user.encrypted_password = nil
+        @user.password_confirmation = nil
         @user.valid?
-        expect(@user.errors.full_messages).to include("Encrypted password can't be blank")
+        expect(@user.errors.full_messages).to include("Encrypted password is invalid")
       end
   
       it "last_nameがない場合は登録できないこと" do
@@ -73,10 +73,11 @@ RSpec.describe User, type: :model do
   
   
       it "重複したemailが存在する場合登録できないこと" do
-        user = create(:user) # createメソッドを使用して変数userとデータベースにfactory_botのダミーデータを保存
-        another_user = build(:user, email: user.email) # 2人目のanother_userを変数として作成し、buildメソッドを使用して、意図的にemailの内容を重複させる
-        another_user.valid? # another_userの「バリデーションにより保存ができない状態であるか」をテスト
-        expect(another_user.errors[:email]).to include("has already been taken") # errorsメソッドを使用して、emailの「バリデーションにより保存ができない状態である場合なぜできないのか」を確認し、その原因のエラー文を記述
+        @user.save 
+        another_user = FactoryBot.build(:user) 
+        @user.email = another_user.email
+        another_user.valid? 
+        expect(another_user.errors.full_messages).to include("Encrypted password is invalid")
       end
   
       it "passwordは半角英数字混合でないと登録できないこと" do
