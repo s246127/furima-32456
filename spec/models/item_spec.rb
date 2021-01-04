@@ -69,7 +69,25 @@ RSpec.describe Item, type: :model do
         expect(@item.errors.full_messages).to include("Shipping date must be other than 1")
       end
 
-     
+      it 'priceが全角数字の場合は登録できないこと' do
+        @item.price = "１０００"
+        @item.valid?
+        expect(@item.errors.full_messages).to include("Price is not a number")
+      end
+
+      it 'priceが299円以下の場合は登録できないこと' do
+        @item.price = 100
+        @item.valid?
+        expect(@item.errors.full_messages).to include("Price must be greater than 300")
+      end
+
+      it 'priceが10000000以上の場合は登録できないこと' do
+        @item.price = 1000000000000000000
+        @item.valid?
+        expect(@item.errors.full_messages).to include("Price must be less than 9999999")
+      end
+
+      
     end
   end
 end
