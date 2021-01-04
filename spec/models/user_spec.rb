@@ -87,12 +87,7 @@ RSpec.describe User, type: :model do
         expect(@user.errors.full_messages).to include("Password confirmation doesn't match Password")
       end
 
-      it 'passwordが存在してもpassword_confirmationがない場合は登録できないこと' do
-        @user.password_confirmation = nil # 意図的に確認用パスワードに値を空にする
-        @user.valid?
-        expect(@user.errors.full_messages).to include("Password confirmation can't be blank", "Password confirmation is invalid")
-      end
-
+      
       it 'passwordが6文字以下であれば登録できないこと' do
         @user.password = '12345' && @user.password_confirmation = '12345' # 意図的に6文字のパスワードを設定してエラーが出るかをテスト
         @user.valid?
