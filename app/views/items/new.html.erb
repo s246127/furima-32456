@@ -7,7 +7,20 @@
     <h2 class="items-sell-title">商品の情報を入力</h2>
     <%= form_with local: true do |f| %>
 
-    <%= render 'shared/error_messages', model: f.object %>
+
+
+
+    <%# ```` %>
+    <%# なぜかエラー発生  'shared/error_messages' %>
+    <%# ```` %>
+    <%# <% render 'shared/error_messages', model: f.object %> %>
+
+
+
+
+
+
+
 
     <%# 出品画像 %>
     <div class="img-upload">
@@ -74,7 +87,7 @@
           発送元の地域
           <span class="indispensable">必須</span>
         </div>
-        <%= f.collection_select(:prefecture_id, Prefecture.all, :id :name, {}, {class:"select-box", id:"item-prefecture"}) %>
+        <%= f.collection_select(:prefecture_id, Prefecture.all, :id, :name, {}, {class:"select-box", id:"item-prefecture"}) %>
         <div class="weight-bold-text">
           発送までの日数
           <span class="indispensable">必須</span>
