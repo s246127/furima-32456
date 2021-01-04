@@ -20,8 +20,15 @@ class Item < ApplicationRecord
   end
 
   has_one_attached :image
-  validates :name, presence: true
-  validates :explain, presence: true
-  validates :price, presence: true
 
+  with_options presence: true do
+   validates :name, 
+   validates :explain, 
+   validates :price, numericality: { only_integer: true,  greater_than: 300, less_than: 9,999,999 }, format: { with: /\A[-]?[0-9]+(\.[0-9]+)?\z/ }
+   validates :category,
+   validates :condition,
+   validates :postage,
+   validates :prefecture,
+   validates :shipping_date, 
+  end
 end
