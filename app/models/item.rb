@@ -22,13 +22,13 @@ class Item < ApplicationRecord
   has_one_attached :image
 
   with_options presence: true do
-   validates :name, 
-   validates :explain, 
-   validates :price, numericality: { only_integer: true,  greater_than: 300, less_than: 9,999,999 }, format: { with: /\A[-]?[0-9]+(\.[0-9]+)?\z/ }
-   validates :category,
-   validates :condition,
-   validates :postage,
-   validates :prefecture,
-   validates :shipping_date, 
+   validates :name 
+   validates :explain 
+   validates :price, numericality: { only_integer: true,  greater_than: 300, less_than: 9999999 }, format: { with: /\A[-]?[0-9]+(\.[0-9]+)?\z/ }
+   validates :category
+   validates :condition
+   validates :postage
+   validates :prefecture
+   validates :shipping_date 
   end
 end
