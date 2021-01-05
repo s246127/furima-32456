@@ -15,10 +15,9 @@ class Item < ApplicationRecord
    validates :category_id 
    validates :condition_id 
    validates :postage_id 
-   validates :prefecture_id
    validates :shipping_date_id 
   end
-  validates :prefecture_id, numericality: { other_than: 0 }
+  validates :prefecture_id, presence: true, numericality: { other_than: 0 }
 
   has_one_attached :image
   
