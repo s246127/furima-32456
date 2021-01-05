@@ -14,9 +14,4 @@ FactoryBot.define do
       item.image.attach(io: File.open('public/images/test_image.png'), filename: 'test_image.jpg', content_type: 'image/png')
     end
   end
-
-
- # 1枚の画像をアップロードする(qiita引用)
- 
-
 end
