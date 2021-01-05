@@ -11,19 +11,20 @@ class Item < ApplicationRecord
   has_one :purchase
   belongs_to :user
 
-  with_options presence: true do
-   validates :category_id, numericality: { other_than: 1 } 
-   validates :condition_id, numericality: { other_than: 1 } 
-   validates :postage_id, numericality: { other_than: 1 } 
-   validates :prefecture_id, numericality: { other_than: 0 } 
-   validates :shipping_date_id, numericality: { other_than: 1 } 
+  with_options presence: true, numericality: {other_than: 1 } do
+   validates :category_id 
+   validates :condition_id 
+   validates :postage_id 
+   validates :prefecture_id
+   validates :shipping_date_id 
   end
+  validates :prefecture_id, numericality: { other_than: 0 }
 
   has_one_attached :image
-
+  
   with_options presence: true do
    validates :name 
    validates :explain 
-   validates :price, numericality: { only_integer: true,  greater_than: 300, less_than: 9999999 }, format: { with: /\A[-]?[0-9]+(\.[0-9]+)?\z/ }
+   validates :price, numericality: { only_integer: true,  greater_than_or_equal_to:300, less_than_or_equal_to:9999999 }, format: { with: /\A[-]?[0-9]+(\.[0-9]+)?\z/ }
   end
 end
