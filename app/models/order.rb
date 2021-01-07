@@ -1,4 +1,4 @@
-class Purchase_form
+class Order
   include ActiveModel::Model
   attr_accessor :user_id, :item_id, :token, :postal_number, :prefecture_id, :city, :district, :building_number, :phone_number
 
@@ -17,6 +17,6 @@ class Purchase_form
     Purchase.create(user_id: user.id, item_id: item.id)
 
     # addressテーブルに住所の情報を保存
-    Address.create(postal_number: postal_number, prefecture_id: prefecture_id, city: city, district: district, building_number: building_number, phone_number: phone_number, user_id: user.id, item_id: item.id)
+    Address.create(postal_number: postal_number, prefecture_id: prefecture_id, city: city, district: district, building_number: building_number, phone_number: phone_number)
   end
 end
