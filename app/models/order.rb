@@ -10,7 +10,8 @@ class Order
     validates :district
     validates :user_id
     validates :item_id
-    validates :phone_number, format: { with: /\A0[0-9]+\z/, message: 'number is invalid. Include half-width numbers' } 
+    validates :token
+    validates :phone_number, format: { with: /\A0[5789]0[-]?\d{4}[-]?\d{4}\z/, message: 'number is invalid. Include half-width numbers' } 
   end
   
 
