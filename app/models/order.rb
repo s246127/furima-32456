@@ -18,7 +18,7 @@ class Order
   def save
     # 各テーブルにデータを保存する処理を書く 
     # purchasesテーブルにクレカの情報を保存
-    purchase = Purchase.create(user_id: user.id, item_id: item.id)
+    purchase = Purchase.create(user_id: user_id, item_id: item_id)
 
     # addressテーブルに住所の情報を保存
     Address.create(postal_number: postal_number, prefecture_id: prefecture_id, city: city, district: district, building_number: building_number, phone_number: phone_number, purchase_id: purchase.id)
