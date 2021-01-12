@@ -7,8 +7,11 @@ RSpec.describe Order, type: :model do
 
   describe '商品購入機能' do
     context '商品が購入できるとき' do
+      it '全ての項目が入力されていれば登録ができること' do
+        expect(@order).to be_valid
+      end
+
       it 'building_number以外の全ての項目が入力されていれば登録ができること' do
-        @order = FactoryBot.create(:order)
         expect(@order).to be_valid
       end
 
@@ -49,7 +52,11 @@ RSpec.describe Order, type: :model do
         expect(@order.errors.full_messages).to include("Prefecture can't be blank")
       end
 
-     
+      it 'prefecture_idが0の場合も購入できないこと' do
+        @order.prefecture_id = 0
+        @order.valid?
+        expect(@order.errors.full_messages).to include("Prefecture Select")
+      end
 
       it 'city がない場合は登録できないこと' do
         @order.city  = nil
@@ -65,7 +72,11 @@ RSpec.describe Order, type: :model do
         expect(@order.errors.full_messages).to include("District can't be blank")
       end
 
-    
+      it '電話番号に-(ハイフン)が含まれている場合は購入できないこと' do
+        @order.phone_number = "090-6723-1234"
+        @order.valid?
+        expect(@order.errors.full_messages).to include("Phone number number is invalid. Include half-width numbers")
+      end
 
       it 'phone_numberがない場合は登録できないこと' do
         @order.phone_number = nil

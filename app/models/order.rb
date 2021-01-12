@@ -11,7 +11,7 @@ class Order
     validates :user_id
     validates :item_id
     validates :token
-    validates :phone_number, format: { with: /\A0[5789]0[-]?\d{4}[-]?\d{4}\z/, message: 'number is invalid. Include half-width numbers' } 
+    validates :phone_number, format: { with: /\A\d{10}$|^\d{11}\z/, message: 'number is invalid. Include half-width numbers' } 
   end
   
 

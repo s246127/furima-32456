@@ -5,9 +5,9 @@ FactoryBot.define do
     token            {"tok_abcdefghijk00000000000000000"} 
     postal_number    {"530-0256"} 
     prefecture_id    {2} 
-    city             {'堺'} 
-    district         {'北区'} 
-    building_number  {} 
+    city             {'堺市南区'} 
+    district         {"御池台1-13-2"} 
+    building_number  {"304"} 
     phone_number     {"090-3456-2346"}
   end
 end
