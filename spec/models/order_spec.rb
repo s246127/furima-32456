@@ -2,16 +2,23 @@ require 'rails_helper'
 
 RSpec.describe Order, type: :model do
   before do
-    @order = FactoryBot.build(:order)
+    @user = FactoryBot.create(:user)
+    @item = FactoryBot.create(:item)
+    # Mysqlでエラーが起こっている.先に読み込まれるべきデータより前に、後のものを読み込んでしまってエラーが起きている
+    sleep(1) 
+    # １秒毎にテスト処理を行う。 テストの記述にsleep(1)を追記
+    @order = FactoryBot.build(:order, user_id: @user.id, item_id: @item.id)
   end
 
   describe '商品購入機能' do
     context '商品が購入できるとき' do
       it '全ての項目が入力されていれば登録ができること' do
+        @order.valid?
         expect(@order).to be_valid
       end
 
       it 'building_number以外の全ての項目が入力されていれば登録ができること' do
+        @order.valid?
         expect(@order).to be_valid
       end
 
@@ -64,8 +71,6 @@ RSpec.describe Order, type: :model do
         expect(@order.errors.full_messages).to include("City can't be blank")
       end
 
-     
-
       it 'districtがない場合は登録できないこと' do
         @order.district = nil
         @order.valid?
@@ -74,6 +79,12 @@ RSpec.describe Order, type: :model do
 
       it '電話番号に-(ハイフン)が含まれている場合は購入できないこと' do
         @order.phone_number = "090-6723-1234"
+        @order.valid?
+        expect(@order.errors.full_messages).to include("Phone number number is invalid. Include half-width numbers")
+      end
+
+      it '電話番号は英数字混合では登録できない' do
+        @order.phone_number = "09t-6s23-12h4"
         @order.valid?
         expect(@order.errors.full_messages).to include("Phone number number is invalid. Include half-width numbers")
       end
@@ -90,13 +101,11 @@ RSpec.describe Order, type: :model do
         expect(@order.errors.full_messages).to include("Postal number is invalid. Include hyphen(-)")
       end
    
-      it '電話番号が11桁以内でない場合は登録できないこと' do
-        @order.phone_number = "09067233456245"
+      it '電話番号は12桁以上では登録できないこと' do
+        @order.phone_number = "090672334562"
         @order.valid?
         expect(@order.errors.full_messages).to include("Phone number number is invalid. Include half-width numbers")
       end
     end
-
-
   end
 end
