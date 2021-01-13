@@ -3,6 +3,9 @@ require 'rails_helper'
 RSpec.describe Item, type: :model do
   before do
     @item = FactoryBot.build(:item)
+     # Mysqlでエラーが起こっている.先に読み込まれるべきデータより前に、後のものを読み込んでしまってエラーが起きている
+     sleep(1) 
+     # １秒毎にテスト処理を行う。 テストの記述にsleep(1)を追記
   end
 
   describe '商品出品機能' do
